@@ -1,0 +1,19 @@
+image: gcc
+
+autotools:       
+  stage: build
+  script:
+    - ./autogen.sh
+    - ./configure
+    - make
+    
+check:
+  stage: test
+  script: make check
+  
+distcheck:
+  stage: test
+  before_script:
+   - apt-get update -qq
+   - apt-get install -y -qq zip
+  script: make distcheck
